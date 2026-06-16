@@ -2,3 +2,241 @@
 @source '../**/*.{js,ts,jsx,tsx}';
 
 @import 'tw-animate-css';
+
+/* ==========================================================================
+   Jevelina Design System — Theme Color Tokens
+   --------------------------------------------------------------------------
+   All tokens are scoped per [data-theme] block. Every theme defines every
+   token — even the ones that are currently identical across clients — so
+   any client can override any token without requiring a structural change.
+
+   Apply a theme by setting data-theme on the root element:
+     <div data-theme="aptia">...</div>
+
+   RULES:
+   - Never use a raw hex value in component code. Always use var(--color-*).
+   - All 22 tokens must be present in every theme block.
+
+   ADDING A NEW CLIENT:
+   1. Copy any existing [data-theme] block.
+   2. Rename the attribute to the new client slug.
+   3. Update the 4 brand tokens (primary-1/2, secondary-1/2).
+   4. Update table-primary / table-secondary (tinted from brand palette).
+   5. Leave all other tokens as-is unless the client specifically requires
+      a custom value.
+   ========================================================================== */
+
+
+[data-theme="aptia"] {
+  /* Brand — unique per client */
+  --color-primary-1:             #113546;  /* nav sidebar, table header borders */
+  --color-primary-2:             #00D17C;  /* icons, chart fills, decorative accents */
+  --color-secondary-1:           #2A7050;  /* header/logo area, supporting icons */
+  --color-secondary-2:           #00205C;  /* primary button fill, links */
+
+  /* Table accent — tinted from brand palette */
+  --color-table-primary:         #DEF3EA;
+  --color-table-secondary:       #98D7BD;
+
+  /* Text */
+  --color-primary-text:          #333333;
+  --color-secondary-text:        #666666;
+
+  /* Backgrounds */
+  --color-primary-background:    #F6F6F6;  /* page canvas */
+  --color-secondary-background:  #FFFFFF;  /* card / panel / modal */
+  --color-tertiary-background:   #F1F1F1;  /* subtle sub-section */
+
+  /* Greys */
+  --color-primary-grey:          #E2E2E2;  /* borders, dividers */
+  --color-secondary-grey:        #999999;  /* disabled, placeholder */
+
+  /* Status — Error */
+  --color-error-primary:         #CC0000;
+  --color-error-background:      #FFDEDE;
+
+  /* Status — Warning */
+  --color-warning-primary:       #A05600;
+  --color-warning-background:    #FFF2E3;
+
+  /* Status — Success */
+  --color-success-primary:       #007E33;
+  --color-success-background:    #E9FFF3;
+
+  /* Status — Info */
+  --color-info-primary:          #007399;
+  --color-info-background:       #D0F3FF;
+}
+
+
+[data-theme="keenan"] {
+  /* Brand — unique per client */
+  --color-primary-1:             #5B2540;
+  --color-primary-2:             #E87823;
+  --color-secondary-1:           #2A7050;
+  --color-secondary-2:           #00205C;
+
+  /* Table accent */
+  --color-table-primary:         #F5EAE1;
+  --color-table-secondary:       #DBD0C7;
+
+  /* Text */
+  --color-primary-text:          #333333;
+  --color-secondary-text:        #666666;
+
+  /* Backgrounds */
+  --color-primary-background:    #F6F6F6;
+  --color-secondary-background:  #FFFFFF;
+  --color-tertiary-background:   #F1F1F1;
+
+  /* Greys */
+  --color-primary-grey:          #E2E2E2;
+  --color-secondary-grey:        #999999;
+
+  /* Status — Error */
+  --color-error-primary:         #CC0000;
+  --color-error-background:      #FFDEDE;
+
+  /* Status — Warning */
+  --color-warning-primary:       #A05600;
+  --color-warning-background:    #FFF2E3;
+
+  /* Status — Success */
+  --color-success-primary:       #007E33;
+  --color-success-background:    #E9FFF3;
+
+  /* Status — Info */
+  --color-info-primary:          #007399;
+  --color-info-background:       #D0F3FF;
+}
+
+
+[data-theme="bywater"] {
+  /* Brand — unique per client */
+  --color-primary-1:             #263746;
+  --color-primary-2:             #59A092;
+  --color-secondary-1:           #59A092;
+  --color-secondary-2:           #133659;
+
+  /* Table accent */
+  --color-table-primary:         #EFF6F5;
+  --color-table-secondary:       #B3C8C4;
+
+  /* Text */
+  --color-primary-text:          #333333;
+  --color-secondary-text:        #666666;
+
+  /* Backgrounds */
+  --color-primary-background:    #F6F6F6;
+  --color-secondary-background:  #FFFFFF;
+  --color-tertiary-background:   #F1F1F1;
+
+  /* Greys */
+  --color-primary-grey:          #E2E2E2;
+  --color-secondary-grey:        #999999;
+
+  /* Status — Error */
+  --color-error-primary:         #CC0000;
+  --color-error-background:      #FFDEDE;
+
+  /* Status — Warning */
+  --color-warning-primary:       #A05600;
+  --color-warning-background:    #FFF2E3;
+
+  /* Status — Success */
+  --color-success-primary:       #007E33;
+  --color-success-background:    #E9FFF3;
+
+  /* Status — Info */
+  --color-info-primary:          #007399;
+  --color-info-background:       #D0F3FF;
+}
+
+
+[data-theme="hub"] {
+  /* Brand — unique per client */
+  --color-primary-1:             #263746;
+  --color-primary-2:             #0678D5;
+  --color-secondary-1:           #055CA3;
+  --color-secondary-2:           #055CA3;
+
+  /* Table accent */
+  --color-table-primary:         #EFF6F5;
+  --color-table-secondary:       #B3C8C4;
+
+  /* Text */
+  --color-primary-text:          #333333;
+  --color-secondary-text:        #666666;
+
+  /* Backgrounds */
+  --color-primary-background:    #F6F6F6;
+  --color-secondary-background:  #FFFFFF;
+  --color-tertiary-background:   #F1F1F1;
+
+  /* Greys */
+  --color-primary-grey:          #E2E2E2;
+  --color-secondary-grey:        #999999;
+
+  /* Status — Error */
+  --color-error-primary:         #CC0000;
+  --color-error-background:      #FFDEDE;
+
+  /* Status — Warning */
+  --color-warning-primary:       #A05600;
+  --color-warning-background:    #FFF2E3;
+
+  /* Status — Success */
+  --color-success-primary:       #007E33;
+  --color-success-background:    #E9FFF3;
+
+  /* Status — Info */
+  --color-info-primary:          #007399;
+  --color-info-background:       #D0F3FF;
+}
+
+
+/* --------------------------------------------------------------------------
+   A1M — sandbox/demo theme. Not a production client.
+   Used internally to prototype new tokens before rolling out to real clients.
+   Do not use as a reference for production screen design.
+   -------------------------------------------------------------------------- */
+[data-theme="a1m"] {
+  /* Brand — unique per client */
+  --color-primary-1:             #82479D;
+  --color-primary-2:             #DF126C;
+  --color-secondary-1:           #60034C;
+  --color-secondary-2:           #0A7593;
+
+  /* Table accent */
+  --color-table-primary:         #EAE4ED;
+  --color-table-secondary:       #DFD3E4;
+
+  /* Text */
+  --color-primary-text:          #333333;
+  --color-secondary-text:        #666666;
+
+  /* Backgrounds */
+  --color-primary-background:    #F6F6F6;
+  --color-secondary-background:  #FFFFFF;
+  --color-tertiary-background:   #FFF2F8;  /* A1M-specific — brand-tinted */
+
+  /* Greys */
+  --color-primary-grey:          #E2E2E2;
+  --color-secondary-grey:        #999999;
+
+  /* Status — Error */
+  --color-error-primary:         #CC0000;
+  --color-error-background:      #FFDEDE;
+
+  /* Status — Warning */
+  --color-warning-primary:       #A05600;
+  --color-warning-background:    #FFF2E3;
+
+  /* Status — Success */
+  --color-success-primary:       #007E33;
+  --color-success-background:    #E9FFF3;
+
+  /* Status — Info */
+  --color-info-primary:          #007399;
+  --color-info-background:       #D0F3FF;
+}
