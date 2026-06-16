@@ -1,7 +1,6 @@
 {
-  "name": "@figma/my-make-file",
-  "private": true,
-  "version": "0.0.1",
+  "name": "@make-kits/javelina-design-system",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "build": "vite build"
@@ -55,5 +54,28 @@
     "overrides": {
       "vite": "6.3.5"
     }
-  }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css",
+    "./dist/*": {
+      "types": "./dist/*",
+      "import": "./dist/*"
+    },
+    "./guidelines/*": "./guidelines/*"
+  },
+  "figma": {
+    "makeKit": {
+      "kitType": "byoc+byods",
+      "formatVersion": 1
+    }
+  },
+  "files": [
+    "dist",
+    "**/*.md",
+    ".figma/make/kit.json"
+  ]
 }

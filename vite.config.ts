@@ -19,4 +19,22 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+  build: {
+  "lib": {
+    "entry": [
+      "./src/index.ts"
+    ],
+    "formats": [
+      "es"
+    ],
+    "cssFileName": "style"
+  },
+  "rollupOptions": {
+    "output": {
+      "preserveModules": true,
+      "preserveModulesRoot": "src",
+      "entryFileNames": "[name].js"
+    }
+  }
+},
 })

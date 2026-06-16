@@ -31,27 +31,32 @@ const base = `
   font-['Open_Sans'] uppercase tracking-normal
   rounded-[4px] cursor-pointer
   transition-opacity duration-150
-  focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-1
-  focus-visible:outline-[var(--color-secondary-2)]
   disabled:cursor-not-allowed
 `.trim().replace(/\s+/g, ' ');
 
+// Focus ring: 4px semi-transparent ring flush with button edge (outline-offset-0),
+// matching Figma's inset[-4px] border-4 overlay at 40% opacity.
+const focusPrimary = `focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-0 focus-visible:[outline-color:color-mix(in_srgb,var(--color-secondary-1)_40%,transparent)]`;
+const focusLink    = `focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-0 focus-visible:[outline-color:color-mix(in_srgb,var(--color-secondary-2)_40%,transparent)]`;
+
 const variants: Record<ButtonType, string> = {
   primary: `
-    bg-[var(--color-secondary-2)]
+    bg-[var(--color-secondary-1)]
     text-[var(--color-secondary-background)]
     border-0
-    hover:opacity-90
-    disabled:bg-[#6B6F7A] disabled:opacity-100
+    hover:opacity-80
+    disabled:bg-[#565962] disabled:opacity-100
+    ${focusPrimary}
   `.trim().replace(/\s+/g, ' '),
 
   secondary: `
     bg-transparent
-    text-[var(--color-secondary-2)]
-    border border-[var(--color-secondary-2)]
-    hover:bg-[var(--color-primary-background)]
+    text-[var(--color-secondary-1)]
+    border border-[var(--color-secondary-1)]
+    hover:opacity-80
     disabled:border-[var(--color-secondary-grey)]
-    disabled:text-[var(--color-secondary-grey)]
+    disabled:text-[#565962]
+    ${focusPrimary}
   `.trim().replace(/\s+/g, ' '),
 
   link: `
@@ -61,8 +66,9 @@ const variants: Record<ButtonType, string> = {
     font-semibold
     !normal-case
     hover:underline
-    disabled:text-[var(--color-secondary-grey)]
+    disabled:text-[#565962]
     disabled:no-underline
+    ${focusLink}
   `.trim().replace(/\s+/g, ' '),
 };
 
@@ -101,8 +107,10 @@ function SplitButton({ variant, size, children, splitAction, disabled, onClick }
 
   const isPrimary = variant === 'primary';
   const fillClass = isPrimary
-    ? 'bg-[var(--color-secondary-2)] text-[var(--color-secondary-background)] disabled:bg-[#6B6F7A]'
-    : 'bg-transparent text-[var(--color-secondary-2)] border border-[var(--color-secondary-2)] disabled:border-[var(--color-secondary-grey)] disabled:text-[var(--color-secondary-grey)]';
+    ? 'bg-[var(--color-secondary-1)] text-[var(--color-secondary-background)] disabled:bg-[#565962]'
+    : 'bg-transparent text-[var(--color-secondary-1)] border border-[var(--color-secondary-1)] disabled:border-[var(--color-secondary-grey)] disabled:text-[#565962]';
+
+  const splitFocus = `focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-0 focus-visible:[outline-color:color-mix(in_srgb,var(--color-secondary-1)_40%,transparent)]`;
 
   return (
     <div
@@ -116,9 +124,8 @@ function SplitButton({ variant, size, children, splitAction, disabled, onClick }
         className={`
           inline-flex items-center justify-center font-['Open_Sans'] uppercase
           font-bold ${textSize} ${height} ${labelPad} ${fillClass}
-          focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-1
-          focus-visible:outline-[var(--color-secondary-2)]
-          cursor-pointer disabled:cursor-not-allowed transition-opacity hover:opacity-90
+          ${splitFocus}
+          cursor-pointer disabled:cursor-not-allowed transition-opacity hover:opacity-80
         `.trim().replace(/\s+/g, ' ')}
       >
         {children}
@@ -131,9 +138,8 @@ function SplitButton({ variant, size, children, splitAction, disabled, onClick }
         className={`
           inline-flex items-center justify-center font-['Open_Sans']
           ${height} ${iconPad} ${fillClass}
-          focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-1
-          focus-visible:outline-[var(--color-secondary-2)]
-          cursor-pointer disabled:cursor-not-allowed transition-opacity hover:opacity-90
+          ${splitFocus}
+          cursor-pointer disabled:cursor-not-allowed transition-opacity hover:opacity-80
         `.trim().replace(/\s+/g, ' ')}
       >
         {splitAction ?? (

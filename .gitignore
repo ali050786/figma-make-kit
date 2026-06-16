@@ -1,6 +1,5 @@
 node_modules/
 dist/
-figma-make-kit/
 pnpm-lock.yaml
 pnpm-workspace.yaml
 __figma__entrypoint__.ts
@@ -10,4 +9,5 @@ default_shadcn_theme.css
 .npmrc
 src/styles/globals.css
 src/styles/theme.css
-src/index.ts
+.DS_Store
+src/.DS_Store
