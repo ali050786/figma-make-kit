@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SideNav, DEFAULT_NAV_ITEMS } from '../SideNav';
+import { SideNav, MEMBER_PORTAL_NAV_ITEMS } from '../SideNav';
 import { SectionBlock } from './SectionBlock';
 
 function GroupLabel({ children }: { children: string }) {
@@ -20,7 +20,7 @@ function GroupLabel({ children }: { children: string }) {
 const NAV_HEIGHT = 480;
 
 export function SideNavSection() {
-  const [activeId, setActiveId] = useState('dashboard');
+  const [activeId, setActiveId] = useState('home');
 
   return (
     <SectionBlock title="Side Navigation">
@@ -50,7 +50,7 @@ export function SideNavSection() {
             }}>
               <SideNav
                 collapsed={true}
-                activeId="dashboard"
+                activeId="home"
               />
             </div>
           </div>
@@ -63,7 +63,7 @@ export function SideNavSection() {
               color: 'var(--color-secondary-text)',
               margin: '0 0 var(--space-2) 0',
             }}>
-              Expanded (334px)
+              Expanded (240px)
             </p>
             <div style={{
               border: '1px solid var(--color-primary-grey)',
@@ -91,7 +91,7 @@ export function SideNavSection() {
           color: 'var(--color-secondary-text)',
           margin: '0 0 var(--space-3) 0',
         }}>
-          Each item shows: default (unselected), active (selected with left accent + overlay), hover (lighter overlay on mouse-over). The active left border uses <code style={{ background: 'var(--color-tertiary-background)', padding: '1px 4px', borderRadius: 2 }}>--color-primary-2</code>.
+          Each item shows: default (outline icon, transparent bg), active (filled icon, dark overlay + left accent bar), hover (outline icon, lighter overlay on mouse-over). The active left border uses <code style={{ background: 'var(--color-tertiary-background)', padding: '1px 4px', borderRadius: 2 }}>--color-primary-2</code>.
         </p>
         <div style={{
           border: '1px solid var(--color-primary-grey)',
@@ -118,13 +118,13 @@ export function SideNavSection() {
       {/* Nav items list */}
       <div>
         <div style={{ marginBottom: 'var(--space-4)' }}>
-          <GroupLabel>Navigation Items</GroupLabel>
+          <GroupLabel>Member Portal Navigation Items</GroupLabel>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', minWidth: 400 }}>
             <thead>
               <tr>
-                {['ID', 'Label', 'Icon Preview'].map(h => (
+                {['ID', 'Label', 'Default Icon', 'Active Icon'].map(h => (
                   <th key={h} style={{
                     padding: 'var(--space-3) var(--space-4)',
                     textAlign: 'left',
@@ -136,7 +136,7 @@ export function SideNavSection() {
               </tr>
             </thead>
             <tbody>
-              {DEFAULT_NAV_ITEMS.map(item => (
+              {MEMBER_PORTAL_NAV_ITEMS.map(item => (
                 <tr key={item.id} style={{ borderBottom: '1px solid var(--color-primary-grey)' }}>
                   <td style={{ padding: 'var(--space-3) var(--space-4)' }}>
                     <code style={{
@@ -163,7 +163,17 @@ export function SideNavSection() {
                       borderRadius: 'var(--radius-sm)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}>
-                      {item.icon}
+                      {item.iconDefault}
+                    </div>
+                  </td>
+                  <td style={{ padding: 'var(--space-3) var(--space-4)' }}>
+                    <div style={{
+                      width: 42, height: 42,
+                      background: 'var(--color-primary-1)',
+                      borderRadius: 'var(--radius-sm)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      {item.iconActive}
                     </div>
                   </td>
                 </tr>

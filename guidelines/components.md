@@ -1,21 +1,31 @@
-This file documents per-component usage patterns specific to this kit.
+# Component Guidelines — Jevelina Design System
 
-If this file is empty or contains only this placeholder, treat the kit's
-exported barrel and component source as the source of truth — see
-`/guidelines/setup.md` Step 3 for how to enumerate components from the
-barrel file and read each component's props.
+All components live in `src/app/components/`. Import from that path directly.
+Read the relevant file below before generating any screen that uses a component.
 
-<!--
-Tip for kit authors: replace this content with per-component guidance.
+---
 
-If you’re using npm packages or have generated new components in Make, we recommend adding component guidelines. This way, Make can learn what components are available and how to use them correctly.
+## Atoms
 
-Create a file for each component. In each file, cover:
-* Usage - When to use the component, including the other components it's commonly used with or within
-* Semantic purpose - What each component group means
-* Examples — Correct and incorrect usage, especially for common mistakes
-* API - The API of the component, including its properties
+| Component | Import | Doc |
+|---|---|---|
+| Button | `src/app/components/Button` | `guidelines/components/button.md` |
+| Input / Textarea | `src/app/components/Input` | `guidelines/components/input.md` |
+| Checkbox | `src/app/components/Checkbox` | `guidelines/components/checkbox.md` |
+| Radio | `src/app/components/Radio` | `guidelines/components/radio.md` |
+| Badge | `src/app/components/Badge` | `guidelines/components/badge.md` |
+| Alert | `src/app/components/Alert` | `guidelines/components/alert.md` |
 
-For more tips, check our guide:
-https://developers.figma.com/docs/code/write-design-system-guidelines/#components-component-guidelines
--->
+## Organisms
+
+| Component | Import | Doc |
+|---|---|---|
+| GlobalHeader | `src/app/components/GlobalHeader` | `guidelines/components/global-header.md` |
+| SideNav | `src/app/components/SideNav` | `guidelines/components/side-nav.md` |
+| Footer | `src/app/components/Footer` | `guidelines/components/footer.md` |
+
+---
+
+> Do not recreate any of these components inline. Always import and use the
+> existing component. If a component does not exist in this list, ask before
+> inventing a new one.

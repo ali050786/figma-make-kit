@@ -11,3 +11,5 @@ src/styles/globals.css
 src/styles/theme.css
 .DS_Store
 src/.DS_Store
+index.html
+src/preview/

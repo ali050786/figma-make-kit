@@ -6,7 +6,11 @@ import svgPaths from '../../imports/SideNavigation-1/svg-uo3p29yi7g';
 export interface NavItem {
   id: string;
   label: string;
-  icon: React.ReactNode;
+  // Each item provides both icon variants, matching Figma's Active/Default states.
+  // Active  = filled solid icon (white fill, no stroke)
+  // Default = outline/stroke icon (white stroke, no fill)
+  iconActive: React.ReactNode;
+  iconDefault: React.ReactNode;
 }
 
 export interface SideNavProps {
@@ -15,65 +19,187 @@ export interface SideNavProps {
   items?: NavItem[];
   onToggle?: () => void;
   onItemClick?: (id: string) => void;
-  onLogout?: () => void;
 }
 
-// ─── SVG icon wrapper ─────────────────────────────────────────────────────────
+// ─── Icon helpers ─────────────────────────────────────────────────────────────
+// Icons are 42×42px containers, centered within the nav item.
+// Active icons use filled paths (solid white).
+// Default icons use stroked paths (white stroke, transparent fill).
 
-function NavSvgIcon({ d, viewBox, d2 }: { d: string; viewBox: string; d2?: string }) {
+function FilledIcon({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ position: 'relative', width: 42, height: 42, flexShrink: 0 }}>
-      <div style={{ position: 'absolute', inset: '10%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <svg style={{ width: '100%', height: '100%' }} fill="none" viewBox={viewBox}>
-          <path fill="white" d={d} clipRule="evenodd" fillRule="evenodd" />
-          {d2 && <path fill="white" d={d2} />}
-        </svg>
-      </div>
+    <div style={{ width: 42, height: 42, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {children}
     </div>
   );
 }
 
-// ─── Default nav items (Jevelina) ─────────────────────────────────────────────
+// ─── Member Portal nav items ──────────────────────────────────────────────────
+// Canonical order per product spec:
+// Home, Coverages, ID Cards, Claims, Prior Auth, Resources, Documents
 
-export const DEFAULT_NAV_ITEMS: NavItem[] = [
+export const MEMBER_PORTAL_NAV_ITEMS: NavItem[] = [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: <NavSvgIcon d={svgPaths.p114d9600} viewBox="0 0 30 32.9955" />,
+    id: 'home',
+    label: 'Home',
+    iconActive: (
+      <FilledIcon>
+        <svg width="26" height="28" viewBox="0 0 26 28" fill="none">
+          <path fill="white" d="M13 0L0 10.4V28h8.667v-8.4H17.333V28H26V10.4L13 0z" />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="26" height="28" viewBox="0 0 26 28" fill="none">
+          <path stroke="white" strokeWidth="1.8" strokeLinejoin="round" d="M13 1.8L1 11.2V27h7.667v-8.4h8.666V27H25V11.2L13 1.8z" />
+        </svg>
+      </FilledIcon>
+    ),
+  },
+  {
+    id: 'coverages',
+    label: 'Coverages',
+    iconActive: (
+      <FilledIcon>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path fill="white" fillRule="evenodd" clipRule="evenodd" d="M14 0L2 5v9c0 7 5.2 13.5 12 15 6.8-1.5 12-8 12-15V5L14 0z" />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path stroke="white" strokeWidth="1.8" strokeLinejoin="round" d="M14 1.5L2.9 6.2v8.8c0 6.5 4.8 12.6 11.1 14 6.3-1.4 11.1-7.5 11.1-14V6.2L14 1.5z" />
+        </svg>
+      </FilledIcon>
+    ),
   },
   {
     id: 'id-cards',
     label: 'ID Cards',
-    icon: <NavSvgIcon d={svgPaths.p242e2300} viewBox="0 0 36.75 26.25" d2={svgPaths.peb9ddf2} />,
+    iconActive: (
+      <FilledIcon>
+        <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+          <path fill="white" fillRule="evenodd" clipRule="evenodd" d={svgPaths.p242e2300} />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+          <rect x="1" y="1" width="30" height="22" rx="2" stroke="white" strokeWidth="1.8" />
+          <circle cx="9" cy="10" r="3.5" stroke="white" strokeWidth="1.5" />
+          <line x1="16" y1="8" x2="27" y2="8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="16" y1="12" x2="24" y2="12" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </FilledIcon>
+    ),
   },
   {
     id: 'claims',
     label: 'Claims',
-    icon: <NavSvgIcon d={svgPaths.pc18170} viewBox="0 0 26 34" />,
+    iconActive: (
+      <FilledIcon>
+        <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+          <path fill="white" fillRule="evenodd" clipRule="evenodd" d={svgPaths.pc18170} />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+          <path stroke="white" strokeWidth="1.8" strokeLinejoin="round" d="M4 1h10l6 6v22H4V1z" />
+          <path stroke="white" strokeWidth="1.5" strokeLinecap="round" d="M14 1v6h6" />
+          <line x1="7" y1="13" x2="17" y2="13" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="7" y1="17" x2="17" y2="17" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="7" y1="21" x2="13" y2="21" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </FilledIcon>
+    ),
   },
   {
-    id: 'accounts',
-    label: 'Accounts',
-    icon: <NavSvgIcon d={svgPaths.pe688a00} viewBox="0 0 23.0982 31.4997" />,
+    id: 'prior-auth',
+    label: 'Prior Auth',
+    iconActive: (
+      <FilledIcon>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path fill="white" fillRule="evenodd" clipRule="evenodd" d="M14 0a14 14 0 100 28A14 14 0 0014 0zm-2 20.5l-5-5 1.4-1.4 3.6 3.6 7.6-7.6 1.4 1.4-9 9z" />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="white" strokeWidth="1.8" />
+          <path stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.5l4 4 9-9" />
+        </svg>
+      </FilledIcon>
+    ),
   },
   {
     id: 'resources',
     label: 'Resources',
-    icon: <NavSvgIcon d={svgPaths.p3f76b280} viewBox="0 0 26 34" />,
+    iconActive: (
+      <FilledIcon>
+        <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+          <path fill="white" fillRule="evenodd" clipRule="evenodd" d={svgPaths.p3f76b280} />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="24" height="30" viewBox="0 0 24 30" fill="none">
+          <path stroke="white" strokeWidth="1.8" strokeLinejoin="round" d="M2 2h14l6 6v20H2V2z" />
+          <path stroke="white" strokeWidth="1.5" strokeLinecap="round" d="M16 2v6h6" />
+          <line x1="6" y1="14" x2="18" y2="14" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="6" y1="18" x2="18" y2="18" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="6" y1="22" x2="14" y2="22" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </FilledIcon>
+    ),
   },
   {
-    id: 'price-comparison',
-    label: 'Price Comparison',
-    icon: <NavSvgIcon d={svgPaths.p34568f7a} viewBox="0 0 16.6016 10.667" />,
+    id: 'documents',
+    label: 'Documents',
+    iconActive: (
+      <FilledIcon>
+        <svg width="26" height="30" viewBox="0 0 26 30" fill="none">
+          <path fill="white" fillRule="evenodd" clipRule="evenodd" d="M2 0h16l8 8v22H2V0zm16 0v8h8" />
+        </svg>
+      </FilledIcon>
+    ),
+    iconDefault: (
+      <FilledIcon>
+        <svg width="26" height="30" viewBox="0 0 26 30" fill="none">
+          <path stroke="white" strokeWidth="1.8" strokeLinejoin="round" d="M2 1h14l8 8v20H2V1z" />
+          <path stroke="white" strokeWidth="1.5" strokeLinecap="round" d="M16 1v8h8" />
+          <line x1="6" y1="16" x2="20" y2="16" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="6" y1="20" x2="20" y2="20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="6" y1="24" x2="14" y2="24" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </FilledIcon>
+    ),
   },
+];
+
+// ─── Admin Portal nav items ───────────────────────────────────────────────────
+// Admin portal currently only has Home.
+
+export const ADMIN_PORTAL_NAV_ITEMS: NavItem[] = [
   {
-    id: 'find-providers',
-    label: 'Find Providers',
-    icon: <NavSvgIcon d={svgPaths.p3aa4ce00} viewBox="0 0 25 22" />,
+    id: 'home',
+    label: 'Home',
+    iconActive: MEMBER_PORTAL_NAV_ITEMS[0].iconActive,
+    iconDefault: MEMBER_PORTAL_NAV_ITEMS[0].iconDefault,
   },
 ];
 
 // ─── Nav item row ─────────────────────────────────────────────────────────────
+// States from Figma:
+//   Active   → background rgba(38,49,84,0.2), left 4px accent bar, filled icon
+//   Hover    → background rgba(38,49,84,0.1), outline icon
+//   Default  → transparent background, outline icon
 
 interface NavItemRowProps {
   item: NavItem;
@@ -84,7 +210,6 @@ interface NavItemRowProps {
 
 function NavItemRow({ item, active, collapsed, onClick }: NavItemRowProps) {
   const [hovered, setHovered] = useState(false);
-  const highlight = active || hovered;
 
   return (
     <button
@@ -92,29 +217,46 @@ function NavItemRow({ item, active, collapsed, onClick }: NavItemRowProps) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       aria-label={item.label}
+      aria-current={active ? 'page' : undefined}
+      title={collapsed ? item.label : undefined}
       style={{
-        display: 'flex', alignItems: 'center', gap: 10,
-        width: '100%', height: 80,
-        padding: 10,
-        background: active ? 'rgba(38,49,84,0.2)' : hovered ? 'rgba(38,49,84,0.1)' : 'transparent',
-        border: 'none', cursor: 'pointer',
-        position: 'relative', flexShrink: 0,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+        width: '100%',
+        height: 64,
+        paddingLeft: collapsed ? 19 : 16,
+        paddingRight: 16,
+        background: active
+          ? 'rgba(38,49,84,0.2)'
+          : hovered
+            ? 'rgba(38,49,84,0.1)'
+            : 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        position: 'relative',
+        flexShrink: 0,
         transition: 'background 0.15s',
+        textAlign: 'left',
       }}
     >
-      {/* Active indicator — left border */}
+      {/* Active state: 4px left accent bar */}
       {active && (
         <div style={{
           position: 'absolute', left: 0, top: 0, bottom: 0, width: 4,
           background: 'var(--color-primary-2)',
         }} />
       )}
-      {item.icon}
+
+      {/* Icon: filled when active, outline when default/hover */}
+      {active ? item.iconActive : item.iconDefault}
+
+      {/* Label — hidden when collapsed */}
       {!collapsed && (
         <span style={{
           fontFamily: 'var(--font-family-base)',
-          fontSize: 'var(--font-size-para-lg)',
-          fontWeight: 'var(--font-weight-semibold)',
+          fontSize: 'var(--font-size-para)',
+          fontWeight: active ? 'var(--font-weight-semibold)' : 'var(--font-weight-regular)',
           color: 'white',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
@@ -128,14 +270,20 @@ function NavItemRow({ item, active, collapsed, onClick }: NavItemRowProps) {
 }
 
 // ─── SideNav ──────────────────────────────────────────────────────────────────
+// Width: 80px collapsed (icon only), 240px expanded (icon + label).
+// Background: var(--color-primary-1) — the brand purple, theme-aware.
+// The nav does NOT include a logout button — logout is in the profile dropdown
+// in the GlobalHeader.
+//
+// Do not add items unless specified. Pass items={MEMBER_PORTAL_NAV_ITEMS}
+// or items={ADMIN_PORTAL_NAV_ITEMS} from the parent.
 
 export function SideNav({
   collapsed: controlledCollapsed,
-  activeId = 'dashboard',
-  items = DEFAULT_NAV_ITEMS,
+  activeId = 'home',
+  items = MEMBER_PORTAL_NAV_ITEMS,
   onToggle,
   onItemClick,
-  onLogout,
 }: SideNavProps) {
   const [internalCollapsed, setInternalCollapsed] = useState(true);
   const collapsed = controlledCollapsed ?? internalCollapsed;
@@ -145,10 +293,13 @@ export function SideNav({
     onToggle?.();
   }
 
-  const width = collapsed ? 80 : 334;
+  const NAV_WIDTH_COLLAPSED = 80;
+  const NAV_WIDTH_EXPANDED = 240;
+  const width = collapsed ? NAV_WIDTH_COLLAPSED : NAV_WIDTH_EXPANDED;
 
   return (
     <nav
+      aria-label="Main navigation"
       style={{
         width,
         minHeight: '100%',
@@ -160,29 +311,42 @@ export function SideNav({
         overflow: 'hidden',
       }}
     >
-      {/* Collapse/expand toggle */}
+      {/* Collapse / expand toggle — chevron icon, same 64px row height as items */}
       <button
         onClick={handleToggle}
         aria-label={collapsed ? 'Expand navigation' : 'Collapse navigation'}
         style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          height: 80, width: 80, flexShrink: 0,
-          background: 'transparent', border: 'none', cursor: 'pointer',
-          alignSelf: 'flex-start',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          height: 64,
+          paddingLeft: collapsed ? 19 : 16,
+          paddingRight: 16,
+          background: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          flexShrink: 0,
+          width: '100%',
         }}
+        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(38,49,84,0.1)')}
+        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
       >
-        <div style={{ position: 'relative', width: 42, height: 42 }}>
-          <div style={{ position: 'absolute', inset: '10%' }}>
-            <svg style={{ width: '100%', height: '100%', transform: collapsed ? 'none' : 'rotate(180deg)', transition: 'transform 0.2s' }} fill="none" viewBox="0 0 27.829 29.999">
-              <path fill="white" d={svgPaths.p24377d00} />
-            </svg>
-          </div>
-        </div>
+        <FilledIcon>
+          <svg
+            width="22" height="22" viewBox="0 0 22 22" fill="none"
+            style={{ transform: collapsed ? 'none' : 'rotate(180deg)', transition: 'transform 0.2s' }}
+          >
+            {/* Left-pointing chevron / hamburger toggle */}
+            <path stroke="white" strokeWidth="2" strokeLinecap="round" d="M14 5L8 11l6 6" />
+          </svg>
+        </FilledIcon>
         {!collapsed && (
           <span style={{
-            fontFamily: 'var(--font-family-base)', fontSize: 'var(--font-size-para-lg)',
-            fontWeight: 'var(--font-weight-semibold)', color: 'white',
-            marginLeft: 10, whiteSpace: 'nowrap',
+            fontFamily: 'var(--font-family-base)',
+            fontSize: 'var(--font-size-para)',
+            fontWeight: 'var(--font-weight-regular)',
+            color: 'white',
+            whiteSpace: 'nowrap',
           }}>
             Collapse
           </span>
@@ -202,37 +366,8 @@ export function SideNav({
 
       <div style={{ flex: 1 }} />
 
-      {/* Divider */}
+      {/* Bottom divider */}
       <div style={{ height: 1, background: 'rgba(255,255,255,0.2)', margin: '0 16px' }} />
-
-      {/* Logout */}
-      <button
-        onClick={onLogout}
-        style={{
-          display: 'flex', alignItems: 'center', gap: 10,
-          height: 60, padding: 10,
-          background: 'transparent', border: 'none', cursor: 'pointer',
-          color: 'white', width: '100%', flexShrink: 0,
-        }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(38,49,84,0.1)')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-      >
-        <div style={{ width: 42, height: 42, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <polyline points="16 17 21 12 16 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <line x1="21" y1="12" x2="9" y2="12" stroke="white" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </div>
-        {!collapsed && (
-          <span style={{
-            fontFamily: 'var(--font-family-base)', fontSize: 'var(--font-size-para-lg)',
-            fontWeight: 'var(--font-weight-semibold)', color: 'white', whiteSpace: 'nowrap',
-          }}>
-            Logout
-          </span>
-        )}
-      </button>
     </nav>
   );
 }
