@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Jevelina Design System — Typography
+   --------------------------------------------------------------------------
+   Open Sans is the only typeface. Required weights: 300, 400, 600, 700.
+   All line heights are AUTO (browser natural) — no explicit values set.
+   No letter spacing on any style.
+
+   Two scale sets exist in Figma:
+   - Desktop/* — the production scale. All variables here match Desktop styles.
+   - Responsive for Figma/* — Figma canvas only, no code equivalent.
+
+   RULES:
+   - Never hardcode a font-size, font-weight, or font-family in a component.
+   - Always use var(--font-*) custom properties.
+   - text-transform: uppercase applies only to button styles.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+  /* -------------------------------------------------------------------------
+     Font family
+     ---------------------------------------------------------------------- */
+  --font-family-base: 'Open Sans', sans-serif;
+
+  /* -------------------------------------------------------------------------
+     Font weights
+     ---------------------------------------------------------------------- */
+  --font-weight-light:    300;
+  --font-weight-regular:  400;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* -------------------------------------------------------------------------
+     Heading scale  (Desktop/H1 – Desktop/H5)
+     ---------------------------------------------------------------------- */
+  --font-size-h1: 3rem;       /* 48px — Desktop/H1 */
+  --font-size-h2: 2rem;       /* 32px — Desktop/H2 */
+  --font-size-h3: 1.5rem;     /* 24px — Desktop/H3 */
+  --font-size-h4: 1.25rem;    /* 20px — Desktop/H4 */
+  --font-size-h5: 1.125rem;   /* 18px — Desktop/H5 */
+
+  /* -------------------------------------------------------------------------
+     Paragraph scale  (Desktop/Para/*)
+     ---------------------------------------------------------------------- */
+  --font-size-para-lg: 1rem;       /* 16px — Paragraph Large */
+  --font-size-para:    0.875rem;   /* 14px — Paragraph (default) */
+  --font-size-para-sm: 0.75rem;    /* 12px — Paragraph Small */
+
+  /* -------------------------------------------------------------------------
+     Interactive scale  (Desktop/Button, Desktop/Link)
+     ---------------------------------------------------------------------- */
+  --font-size-btn:    0.875rem;   /* 14px — Button / Button Bold */
+  --font-size-btn-sm: 0.75rem;    /* 12px — Small Button / Small Button Semibold */
+  --font-size-link:   0.875rem;   /* 14px — Link Regular / Link Bold */
+}

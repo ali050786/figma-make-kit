@@ -4,6 +4,54 @@
 @import 'tw-animate-css';
 
 /* ==========================================================================
+   Jevelina Design System — Layout Grid (Tailwind v4 @theme)
+   --------------------------------------------------------------------------
+   12-column grid, 8px gutter base. Container max-widths match Figma breakpoints.
+   The nav sidebar (88px) is a fixed layout element — content area sits beside it,
+   not inside the container. The container itself stays centered in the content area.
+
+   Breakpoints:
+     sm   600px   — 4 columns, 16px gutters, 16px margins
+     md   960px   — 8 columns, 16px gutters, 32px margins
+     lg   1240px  — 12 columns, 24px gutters, 144px margins (container: 1240px)
+     xl   1440px  — 12 columns, 32px gutters, 144px margins (container: 1440px)
+   ========================================================================== */
+
+@theme {
+  /* Container max-widths per breakpoint */
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 960px;
+  --breakpoint-lg: 1240px;
+  --breakpoint-xl: 1440px;
+
+  --container-sm:  100%;      /* fluid below md */
+  --container-md:  100%;      /* fluid 600–959 */
+  --container-lg:  1240px;    /* fixed 1240–1439 */
+  --container-xl:  1440px;    /* fixed 1440+ */
+
+  /* Column counts (used as Tailwind grid-cols-* values) */
+  --grid-cols-mobile:  4;
+  --grid-cols-tablet:  8;
+  --grid-cols-desktop: 12;
+
+  /* Gutters per breakpoint */
+  --grid-gutter-sm:  1rem;    /* 16px */
+  --grid-gutter-md:  1rem;    /* 16px */
+  --grid-gutter-lg:  1.5rem;  /* 24px */
+  --grid-gutter-xl:  2rem;    /* 32px */
+
+  /* Margins (horizontal padding on the content wrapper) */
+  --grid-margin-sm:  1rem;    /* 16px */
+  --grid-margin-md:  2rem;    /* 32px */
+  --grid-margin-lg:  9rem;    /* 144px */
+  --grid-margin-xl:  9rem;    /* 144px */
+
+  /* Nav sidebar width — fixed, sits outside the content container */
+  --nav-sidebar-width: 5.5rem; /* 88px */
+}
+
+
+/* ==========================================================================
    Jevelina Design System — Theme Color Tokens
    --------------------------------------------------------------------------
    All tokens are scoped per [data-theme] block. Every theme defines every

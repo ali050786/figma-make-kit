@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Jevelina Design System — Spacing & Border Radius
+   --------------------------------------------------------------------------
+   Base unit: 8px. All spacing tokens are multiples or sub-multiples of 8.
+   The 4px half-unit exists for tight internal component spacing only.
+
+   RULES:
+   - Never hardcode a spacing value in a component. Use var(--space-*).
+   - Never hardcode a border-radius value. Use var(--radius-*).
+   - Spacing tokens cover padding, margin, and gap between elements.
+   ========================================================================== */
+
+:root {
+  /* -------------------------------------------------------------------------
+     Spacing scale
+     ---------------------------------------------------------------------- */
+  --space-1:  0.25rem;   /*  4px — tight internal gaps, icon padding */
+  --space-2:  0.5rem;    /*  8px — icon-to-label gap, stacked element gap */
+  --space-3:  0.75rem;   /* 12px — accordion/compact row vertical padding */
+  --space-4:  1rem;      /* 16px — input padding, tab horizontal padding */
+  --space-5:  1.25rem;   /* 20px — accordion horizontal padding, small button horizontal */
+  --space-6:  1.5rem;    /* 24px — standard card inner spacing */
+  --space-8:  2rem;      /* 32px — section separators */
+  --space-10: 2.5rem;    /* 40px — large button horizontal padding */
+  --space-12: 3rem;      /* 48px — large layout spacing */
+  --space-16: 4rem;      /* 64px — major section spacing */
+  --space-24: 8rem;      /* 128px — page-level spacing */
+  --space-32: 12rem;     /* 192px — maximum layout spacing */
+
+  /* -------------------------------------------------------------------------
+     Border radius
+     ---------------------------------------------------------------------- */
+  --radius-sm:   4px;    /* Buttons, inputs, text areas, cards */
+  --radius-md:   8px;    /* Dashboard tiles, modals, larger cards */
+  --radius-pill: 20px;   /* Badges, pill-shaped labels */
+  --radius-none: 0px;    /* Accordion rows, tabs, table rows, dividers */
+}
